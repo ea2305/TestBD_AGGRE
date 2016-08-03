@@ -15,3 +15,9 @@ npm install
 ```
 npm start
 ```
+
+## MySQL data base 
+* DB_TEST.sql
+
+### Repository
+https://github.com/ea2305/TestBD_AGGRE
