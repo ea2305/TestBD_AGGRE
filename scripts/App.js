@@ -92,20 +92,17 @@ export default class App extends Component {
 
 	render() {
 
-		console.log(" ---- recepcion de datos ------- ");
 		var E = this.state.struct;
-		console.log( E );
 		
 		var cards = E.hotel.map( ( e ) => {
 			let years = this.getElementsOf( e );
-			console.log(e + "--");
-			console.log( years );
+
 			return(
 				<Card>
 					<CardHeader
 						title={e}
 						subtitle={"Resultados de " + e}
-						avatar="http://lorempixel.com/100/100/nature/"/>
+						avatar="http://lorempixel.com/100/100/city/"/>
 					<Table>
 						<TableHeader>
 							<TableRow>
@@ -122,18 +119,23 @@ export default class App extends Component {
 						<TableBody>
 							{
 							this.state.temp.map( (x , i) =>{
-								let index = 0;
+								var data_state = this.state.sql.filter( (y) => {
+									return e == y.nombre && x == y.Temporada
+								},this);
+
 								return(
 								<TableRow>
 									<TableRowColumn>{x}</TableRowColumn>
-									{	
+									{
 
-										this.state.sql.map( ( y ) => {
-											console.log( e );
-											if( years[index] == y.anio && x == y.Temporada && e == y.nombre ){
-												index++;
-												return (<TableRowColumn>{y.C_NAME}</TableRowColumn>);
-											}
+										years.map( ( y , index ) => {
+											console.log( "RESULT : ",y );
+											console.log( data_state[index] );
+											if( (data_state.length - 1) >= index ){
+												if( y == data_state[index].anio )
+													return (<TableRowColumn>{data_state[index].C_NAME}</TableRowColumn>);
+											}else
+												return undefined;
 										},this)
 									}
 								</TableRow>
