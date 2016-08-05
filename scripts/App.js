@@ -122,20 +122,19 @@ export default class App extends Component {
 								var data_state = this.state.sql.filter( (y) => {
 									return e == y.nombre && x == y.Temporada
 								},this);
-
+								console.log( data_state , "<---");
 								return(
 								<TableRow>
 									<TableRowColumn>{x}</TableRowColumn>
 									{
 
-										years.map( ( y , index ) => {
-											console.log( "RESULT : ",y );
-											console.log( data_state[index] );
-											if( (data_state.length - 1) >= index ){
-												if( y == data_state[index].anio )
-													return (<TableRowColumn>{data_state[index].C_NAME}</TableRowColumn>);
-											}else
-												return undefined;
+										years.map( ( y ) => {
+
+											for (var i = 0 ; i < data_state.length ; i++){
+												if( y == data_state[i].anio )
+													return (<TableRowColumn>{data_state[i].C_NAME}</TableRowColumn>);
+											}
+											return (<TableRowColumn>0</TableRowColumn>);
 										},this)
 									}
 								</TableRow>
